@@ -1,0 +1,50 @@
+<div class="container">
+  <form [formGroup]="form" class="form">
+    <mat-form-field class="form__item">
+      <mat-label>Upload image</mat-label>
+      <button mat-icon-button matPrefix (click)="imageInput.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      <input type="text" readonly matInput formControlName="imgFileName"/>
+      <input #imageInput type="file" accept="image/*" hidden (change)="onChangeFile(imageInput.files?.[0])"/>
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form__item">
+      <mat-label>Animation type</mat-label>
+      <mat-select formControlName="animationType">
+        <mat-option *ngFor="let animation of animationTypes" [value]="animation[0]">
+          {{animation[1]}}
+        </mat-option>
+      </mat-select>
+      <mat-error>This field is required</mat-error>
+    </mat-form-field>
+
+    <div class="form__item form__item--row">
+      <mat-form-field>
+        <mat-label>Container width</mat-label>
+        <input type="number" matInput formControlName="containerWidth">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Container height</mat-label>
+        <input type="number" matInput formControlName="containerHeight">
+      </mat-form-field>
+    </div>
+
+    <div class="form__item form__item--row">
+      <mat-form-field>
+        <mat-label>Position X</mat-label>
+        <input type="number" matInput formControlName="positionX">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Position Y</mat-label>
+        <input type="number" matInput formControlName="positionY">
+      </mat-form-field>
+    </div>
+
+  </form>
+
+  <button mat-raised-button (click)="onDownloadBtnClick()">Download HTML file</button>
+</div>
